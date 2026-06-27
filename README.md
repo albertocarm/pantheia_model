@@ -33,6 +33,15 @@ Rscript inst/reproduce_tables.R
 #   Validation (n=62)                               C=0.603 (0.518-0.687)
 ```
 
+## Reproduce the figures
+
+```r
+Rscript inst/reproduce_figures.R
+# writes figures/Figure_1.pdf (validation KM + calibration),
+#        figures/Supp_Figure_S1.pdf (death-time density),
+#        figures/Supp_Figure_S2.pdf (variable clustering)
+```
+
 ## Launch the calculator
 
 ```r

@@ -18,3 +18,10 @@ Imports:
     splines,
     survival
 RoxygenNote: 7.2.3
+Suggests:
+    survminer,
+    cowplot,
+    dplyr,
+    Hmisc,
+    rms,
+    car
