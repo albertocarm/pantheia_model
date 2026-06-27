@@ -42,6 +42,14 @@ Rscript inst/reproduce_figures.R
 #        figures/Supp_Figure_S2.pdf (variable clustering)
 ```
 
+## Reproduce the supplementary tables
+
+```r
+Rscript inst/reproduce_supplementary_tables.R
+# Supp Table S1 (collinearity: GVIF + redundancy) and
+# Supp Table S2 (pairwise associations cachexia/ECOG/SIRI)
+```
+
 ## Launch the calculator
 
 ```r
