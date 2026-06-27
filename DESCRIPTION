@@ -1,0 +1,20 @@
+Package: pantheia_model
+Title: PANTHEIA-SIRI Prognostic Model: Calculator and Reproducible Tables
+Version: 0.1.0
+Authors@R: person("Alberto", "Carmona-Bayonas", role = c("aut", "cre"), email = "carmonab@um.es")
+Description: Fitted PANTHEIA-SIRI prognostic models (3-level tumour-burden
+    coding) for overall survival in metastatic pancreatic ductal adenocarcinoma,
+    an interactive Shiny calculator, and a one-command script that reproduces
+    the coefficient table (Table 2) and the discrimination/calibration table
+    (Table 3) of the external-validation paper from de-identified analysis
+    datasets.
+License: GPL-3
+Encoding: UTF-8
+Depends: R (>= 4.0.0)
+Imports:
+    ggplot2,
+    scales,
+    shiny,
+    splines,
+    survival
+RoxygenNote: 7.2.3
