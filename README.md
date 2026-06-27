@@ -11,7 +11,7 @@
 
 ## Overview
 
-`pantheia_model` accompanies the external-validation study of the **PANTHEIA-SIRI**
+`pantheia_model` accompanies the development and internal validation study of the **PANTHEIA-SIRI**
 prognostic model for overall survival (OS) in metastatic pancreatic ductal
 adenocarcinoma. It bundles, in one place, everything needed to **use** the model and
 to **reproduce** the paper:
@@ -56,8 +56,8 @@ this repository.
 | Script | Reproduces |
 |--------|------------|
 | `reproduce_tables.R` | Table 2 (coefficients) + Table 3 (discrimination/calibration) |
-| `reproduce_figures.R` | Figure 1 + Supplementary Figures S1–S2 |
-| `reproduce_supplementary_tables.R` | Supplementary Tables S1–S2 |
+| `reproduce_figures.R` | Figure 1 + Supplementary Figures S1 and S3 |
+| `reproduce_supplementary_tables.R` | Supplementary Tables S5 and S6 |
 
 **From the installed package** (any working directory):
 
@@ -85,12 +85,12 @@ Table 3:  Derivation (n=593, pooled over 10 imputations)  C = 0.654 (0.627-0.681
 
 # reproduce_figures.R  -> writes to ./figures/
 Figure_1.pdf         validation OS by risk group (KM, panels A-B) + calibration (C-D)
-Supp_Figure_S1.pdf   probability density of death times (validation cohort)
-Supp_Figure_S2.pdf   variable clustering of the model predictors (derivation)
+Supp_Figure_S1.pdf   variable clustering of the model predictors (derivation)
+Supp_Figure_S3.pdf   probability density of death times (validation cohort)
 
 # reproduce_supplementary_tables.R
-Supp Table S1  GVIF and redundancy  (all GVIF^(1/2df) < 1.06; no redundant variables)
-Supp Table S2  pairwise associations among cachexia, ECOG and SIRI
+Supp Table S5  GVIF and redundancy  (all GVIF^(1/2df) < 1.06; no redundant variables)
+Supp Table S6  pairwise associations among cachexia, ECOG and SIRI
 ```
 
 ## Data
@@ -103,7 +103,7 @@ codes, centres, dates or other identifiers are included.
   survival-analysis population (n = 593; column `imp` = 1–10). Derivation performance
   is therefore reproduced **over the imputations and pooled with Rubin's rules**, not
   on complete cases only.
-- `validation_os.csv` — the independent external-validation cohort (n = 62).
+- `validation_os.csv` — the separate, non-overlapping internal-validation cohort (n = 62).
 
 `CACS` is the baseline symptom composite (anorexia, cachexia, asthenia, or
 weight loss > 5%).

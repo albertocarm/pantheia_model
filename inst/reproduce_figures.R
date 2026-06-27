@@ -1,8 +1,8 @@
 # Reproduces the figures of the PANTHEIA-SIRI validation paper from the fitted
 # model and the de-identified analysis datasets shipped with this package:
-#   Figure 1     - external-validation OS by risk group (KM) + calibration (6/12 mo)
-#   Supp Fig S1  - probability density of death times (validation cohort)
-#   Supp Fig S2  - variable clustering of the model predictors (derivation)
+#   Figure 1     - internal-validation OS by risk group (KM) + calibration (6/12 mo)
+#   Supp Fig S1  - variable clustering of the model predictors (derivation)
+#   Supp Fig S3  - probability density of death times (validation cohort)
 # Run from the package root:  Rscript inst/reproduce_figures.R
 suppressMessages({ library(survival); library(splines); library(ggplot2) })
 
@@ -52,7 +52,7 @@ calib <- function(t_cal, lab, col){
 fig1 <- cowplot::plot_grid(cowplot::plot_grid(pA,pB,ncol=2), cowplot::plot_grid(calib(6,"C","#2E86C1"),calib(12,"D","#E74C3C"),ncol=2), nrow=2)
 ggsave(file.path(outdir,"Figure_1.pdf"), fig1, width=7.96, height=5.2, dpi=300)
 
-## ===== Supp Fig S1: density of death times (validation) =====
+## ===== Supp Fig S3: density of death times (validation) =====
 deaths <- sort(df$time[df$event==1]); nd <- length(deaths); med <- median(deaths)
 sw <- function(fr){k<-ceiling(fr*nd);best<-Inf;bi<-1;for(i in 1:(nd-k+1)){w<-deaths[i+k-1]-deaths[i];if(w<best){best<-w;bi<-i}};c(lo=deaths[bi],hi=deaths[bi+k-1],width=best)}
 w50<-sw(.5); w75<-sw(.75); dens<-density(deaths,from=0,to=max(deaths)+2); dfd<-data.frame(t=dens$x,d=dens$y); dd<-data.frame(time=deaths)
@@ -65,12 +65,12 @@ ps1 <- ggplot() +
   labs(x="Time to death (months)", y="Probability density",
        title=sprintf("Validation cohort: density of death times (n=%d deaths)", nd)) +
   theme_classic(base_size=11) + theme(plot.title=element_text(face="bold", size=11))
-ggsave(file.path(outdir,"Supp_Figure_S1.pdf"), ps1, width=8.5, height=4.6)
+ggsave(file.path(outdir,"Supp_Figure_S3.pdf"), ps1, width=8.5, height=4.6)
 
-## ===== Supp Fig S2: variable clustering (derivation) =====
+## ===== Supp Fig S1: variable clustering (derivation) =====
 imp <- read.csv(file.path(extd,"derivation_os_imputed.csv")); d1 <- imp[imp$imp==1,]
 for(cc in c("diam3","regimen_cat","ecog_cat_3","CACS")) d1[[cc]] <- factor(d1[[cc]])
 vc <- Hmisc::varclus(~ diam3 + logsiri + regimen_cat + ecog_cat_3 + CACS, data = d1)
-pdf(file.path(outdir,"Supp_Figure_S2.pdf"), width=7, height=5); plot(vc); title("Variable clustering of the model predictors (derivation)"); dev.off()
+pdf(file.path(outdir,"Supp_Figure_S1.pdf"), width=7, height=5); plot(vc); title("Variable clustering of the model predictors (derivation)"); dev.off()
 
-cat("Figures written to", outdir, ":\n  Figure_1.pdf, Supp_Figure_S1.pdf, Supp_Figure_S2.pdf\n")
+cat("Figures written to", outdir, ":\n  Figure_1.pdf, Supp_Figure_S1.pdf, Supp_Figure_S3.pdf\n")

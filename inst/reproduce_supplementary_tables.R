@@ -1,5 +1,5 @@
-# Reproduces Supplementary Table S1 (collinearity diagnostics: GVIF and
-# redundancy analysis) and Supplementary Table S2 (pairwise associations among
+# Reproduces Supplementary Table S5 (collinearity diagnostics: GVIF and
+# redundancy analysis) and Supplementary Table S6 (pairwise associations among
 # the cachexia, ECOG and SIRI predictors) of the PANTHEIA-SIRI validation paper,
 # from the de-identified derivation analysis data shipped with this package.
 # Run from the package root:  Rscript inst/reproduce_supplementary_tables.R
@@ -15,13 +15,13 @@ d <- imp[imp$imp == 1, ]                         # one multiply-imputed dataset 
 d <- d[d$os_time > 0, ]
 for (cc in c("diam3", "regimen_cat", "ecog_cat_3", "CACS")) d[[cc]] <- factor(d[[cc]])
 
-cat("=== Supplementary Table S1: collinearity diagnostics (derivation) ===\n")
+cat("=== Supplementary Table S5: collinearity diagnostics (derivation) ===\n")
 m <- lm(log(os_time) ~ diam3 + logsiri + regimen_cat + ecog_cat_3 + CACS, data = d)
 cat("(a) Generalized variance inflation factors:\n"); print(round(car::vif(m), 3))
 cat("\n(b) Redundancy analysis (Hmisc::redun, R2 = 0.9):\n")
 print(redun(~ diam3 + logsiri + regimen_cat + ecog_cat_3 + CACS, data = d, r2 = 0.9, nk = 4))
 
-cat("\n=== Supplementary Table S2: pairwise associations (cachexia / ECOG / SIRI) ===\n")
+cat("\n=== Supplementary Table S6: pairwise associations (cachexia / ECOG / SIRI) ===\n")
 cramerV <- function(x, y) { tb <- table(x, y); chi <- suppressWarnings(chisq.test(tb)); k <- min(dim(tb))
   c(V = sqrt(as.numeric(chi$statistic) / (sum(tb) * (k - 1))), p = chi$p.value) }
 ce <- cramerV(d$CACS, d$ecog_cat_3)

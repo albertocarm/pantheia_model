@@ -3,8 +3,8 @@
 #
 # Derivation performance is computed over the 10 multiply-imputed datasets of the
 # survival-analysis population (n = 593) and pooled with Rubin's rules -- i.e. the
-# missing tumour-burden split is imputed, NOT dropped. External validation uses the
-# independent cohort (n = 62). Run from the package root:
+# missing tumour-burden split is imputed, NOT dropped. Internal validation uses the
+# separate, non-overlapping cohort (n = 62). Run from the package root:
 #   Rscript inst/reproduce_tables.R
 suppressMessages({ library(survival); library(splines) })
 
